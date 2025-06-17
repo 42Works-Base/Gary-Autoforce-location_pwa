@@ -1,0 +1,445 @@
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div
+    id="content-wrapper"
+    class="review_content_wraper pos-relative"
+    *ngIf="status == 'ONLINE'"
+  >
+    <app-loader [loading]="loading"></app-loader>
+    <div class="container-fluid customer_review_main_wrap">
+      <div class="row customer_review_inner_wrap">
+        <div class="col-md-12">
+          <div
+            class="customer_reviews_logo"
+            *ngIf="location?.business_logo_url != null"
+          >
+            <img
+              src="{{ location?.business_logo_url }}"
+              alt="{{ location?.name }}"
+            />
+          </div>
+          <div
+            class="customer_reviews_logo"
+            *ngIf="
+              location?.business_logo_url == null ||
+              location.business_logo_url == 'undefined'
+            "
+          >
+            <img src="assets/img/login_logo.png" alt="{{ location?.name }}" />
+          </div>
+
+          <div class="customer_reviews_text customer_slide_review_text">
+            <h1>{{ location?.review_heading }}</h1>
+            <p>{{ location?.review_msg }}</p>
+          </div>
+          <div class="select_customer_option_reviews" id="revwpadding">
+            <span
+              *ngFor="let soc of social_checked; let i = index"
+              style="margin: 0; padding: 0"
+              class="social_link"
+            >
+              <a
+                href="{{ soc.url }}"
+                target="_blank"
+                (click)="updatePwaReviewSitesCount(soc.imageurl)"
+                *ngIf="soc.ischecked == 1 && i < 3"
+                target="_blank"
+                style="width: auto"
+              >
+                <img src="{{ soc.imageurl }}" alt="img" class="cust_rev_logo" />
+                <img
+                  src="{{ soc.imageurl }}"
+                  alt="img"
+                  class="cust_active_logo"
+                />
+              </a>
+            </span>
+            <span
+              style="margin: 0; padding: 0"
+              *ngIf="location?.can_we_improve == 1"
+            >
+              <a href="javascript:;" id="review_wrap">
+                <img
+                  src="assets/img/feedback_autoforce.png"
+                  alt="img" class="swingimage1"
+                />
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row customer_review_inner_wrap" style="display: none">
+        <div class="col-md-12">
+          <div
+            class="customer_reviews_logo"
+            *ngIf="location?.business_logo_url != null"
+          >
+            <img src="{{ location?.business_logo_url }}" alt="img" />
+          </div>
+          <div
+            class="customer_reviews_logo"
+            *ngIf="
+              location?.business_logo_url == null ||
+              location.business_logo_url == 'undefined'
+            "
+          >
+            <img src="assets/img/login_logo.png" alt="img" />
+          </div>
+
+          <div class="customer_reviews_text">
+            <h1>{{ location?.welome_heading }}</h1>
+            <p *ngIf="location?.welcome_msg != null">
+              {{ location?.welcome_msg }}
+            </p>
+          </div>
+          <div class="how_feel_wrap">
+            <h2>{{ location?.welcome_selection_msg }}</h2>
+            <a
+              href="javascript:;"
+              (click)="update_happy_count()"
+              routerLink="/review/{{ group_id }}/{{ location_id }}"
+              class=""
+            >
+              <img src="assets/img/smile.png" alt="img" class="swingimage" />
+            </a>
+            <a
+              (click)="update_sad_count()"
+              href="javascript:void();"
+              id="review_wrap"
+            >
+              <img src="assets/img/sad.png" alt="img" class="swingimage1" />
+            </a>
+            <!-- 
+              <a href="review-slide.html" class="happy_smile_icon"><i class="far fa-smile"></i></a>  
+             <a href="javascript:void();"> <i class="far fa-angry"></i> </a>  
+            -->
+          </div>
+          <div class="share" *ngIf="isIos != true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.container-fluid -->
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer_nu customer_reviews_footer">
+      <div class="my-auto" style="position: relative; width: 100%">
+        <!--button style="left:10px;top:-5px" *ngIf="isIos != true" class="btn btn-primary social" (click)="share()"><i class="fa fa-share-alt"></i></button-->
+        <div class="copyright text-center my-auto">
+          <a href="https://autoforce.io">
+            <img src="assets/img//auto-footer-logo.png" alt="AutoForce" />
+            <!--p style="color: #333;">Powering online reviews</p-->
+          </a>
+        </div>
+        <!--button style="right:10px;top:-5px" *ngIf="isIos != true" class="btn btn-primary social" (click)="addHome()"><i class="fa fa-home"></i></button-->
+      </div>
+    </footer>
+  </div>
+  <div
+    id="content-wrapper"
+    class="review_content_wraper"
+    *ngIf="status == 'OFFLINE'"
+  >
+    <div class="container-fluid customer_review_main_wrap">
+      <div class="row customer_review_inner_wrap">
+        <div class="col-md-12">
+          <div
+            class="customer_reviews_text review_thanks_text not_internet_connection"
+          >
+            <img src="assets/img/no-connection.png" alt="img" />
+            <h1>Ooops!</h1>
+            <p>
+              No internet Connection Found. <br />
+              Please Check Your internet Connection
+            </p>
+          </div>
+          <div class="clearfix"></div>
+          <div class="connecting" style="position: relative">
+            Reconnecting...
+            <!--div class="text">
+              CONNECTING
+            </div>
+            <div class="box">
+              <div class="comp"></div>
+              <div class="loader"></div>
+              <div class="con"></div>
+              <div class="byte"></div>
+              <div class="server"></div>
+            </div-->
+          </div>
+          <!--a class="back_tohome_btn try_again-btn" href="javascript:void();" (click)="getLocationData()">Try Again</a-->
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+
+    <div class="clearfix"></div>
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!---review popup one-->
+<div
+  class="modal md-modal modal_popup_wrap md-effect-12"
+  id="customer_review_form"
+>
+  <button
+    id="closeModal" class="close"
+    type="button"
+    data-dismiss="modal"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content md-content">
+      <div class="paymentplan_wrap">
+        <form name="submitReviewForm"
+          autocomplete="off"
+          #submitReviewForm="ngForm"
+          (ngSubmit)="submitReview(submitReviewForm.value)"
+        >
+          <div class="row customer_review_inner_wrap">
+            <div class="col-md-12">
+              <div
+                class="customer_reviews_logo"
+                *ngIf="location?.business_logo_url != null"
+              >
+                <img src="{{ location.business_logo_url }}" alt="img" />
+              </div>
+
+              <div
+                class="customer_reviews_logo"
+                *ngIf="location?.business_logo_url == null"
+              >
+                <img src="assets/img/login_logo.png" alt="img" />
+              </div>
+
+              <div
+                class="customer_reviews_text customer_slide_review_text how_feel_wrap"
+              >
+                <h2 style="color: #242424">{{ location?.feedback_heading }}</h2>
+                <p *ngIf="location?.feedback_msg != null">
+                  {{ location?.feedback_msg }}
+                </p>
+              </div>
+
+              <div class="customer_form_wrap pos-relative">
+                <app-loader [loading]="loading"></app-loader>
+
+                <div class="infoMessages">
+                  <div
+                    class="alert alert-danger {{ animate }} animated"
+                    *ngIf="error_msg != null"
+                  >
+                    {{ error_msg }}
+                    <span class="cross" (click)="hideMessages()">X</span>
+                  </div>
+                  <div
+                    class="alert alert-success {{ animate }} animated"
+                    *ngIf="success_msg != null"
+                  >
+                    {{ success_msg }}
+                    <span class="cross" (click)="hideMessages()">X</span>
+                  </div>
+                </div>
+                <a
+                  href="javascript:;"
+                  class="smiley"
+                  (click)="selectSmiley('happy')"
+                  [ngClass]="{ active: selected_smiley == 'happy' }"
+                >
+                  <img src="assets/img/happy_smiley.png" />
+                </a>
+                <a
+                  href="javascript:;"
+                  class="smiley"
+                  (click)="selectSmiley('nocomment')"
+                  [ngClass]="{ active: selected_smiley == 'nocomment' }"
+                >
+                  <img src="assets/img/nocomment_smiley.png" />
+                </a>
+                <a
+                  href="javascript:;"
+                  class="smiley"
+                  (click)="selectSmiley('sad')"
+                  [ngClass]="{ active: selected_smiley == 'sad' }"
+                >
+                  <img src="assets/img/sad_smiley.png" />
+                </a>
+                <textarea
+                  placeholder="Please tell us what we could do to improve"
+                  style="margin-bottom: 0px"
+                  name="review"
+                  [(ngModel)]="review"
+                ></textarea>
+
+                <button
+                  type="button"
+                  class="customer_submit_form"
+                  id="contact_formOpen"
+                >
+                  Submit
+                </button>
+
+                <!--p class="more_fields_checkbox">
+              <input type="checkbox" [checked]="extra_fields" (change)="extra_fields = !extra_fields">
+              <strong>I'd like someone to contact me about my feedback</strong>
+            </p>
+            <p [ngStyle] = "getMoreFields()"></p-->
+
+                <div
+                  class="popup-field-section"
+                  id="popupExtraFields"
+                  style="display: none"
+                >
+                  <button type="submit" class="customer-popup-close">X</button>
+                  <p>
+                    We’d appreciate you leaving your contact details in case we
+                    need to contact you.
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    [(ngModel)]="name"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    [(ngModel)]="email"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Phone Number"
+                    name="phone"
+                    [(ngModel)]="phone"
+                  />
+
+                  <button type="submit" class="customer_submit_form">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- modal Footer -->
+      <footer class="customer_reviews_footer">
+        <div class="my-auto" style="position: relative; width: 100%;">
+          <div class="copyright text-center my-auto">
+            <a href="https://autoforce.io">
+              <img src="assets/img//auto-footer-logo.png" alt="AutoForce" />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+<div class="md-overlay"></div>
+<!--review popup one-->
+<!--review popup tow-->
+<div
+  class="modal fade modal_popup_wrap review_popup_tow_wrap"
+  id="rating_modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              class="customer_reviews_logo"
+              *ngIf="location?.business_logo_url != null"
+            >
+              <img src="{{ location.business_logo_url }}" alt="img" />
+            </div>
+
+            <div
+              class="customer_reviews_logo"
+              *ngIf="location?.business_logo_url == null"
+            >
+              <img src="assets/img/login_logo.png" alt="img" />
+            </div>
+
+            <div class="customer_reviews_text customer_slide_review_text">
+              <p *ngIf="location?.welcome_msg != null">
+                {{ location?.welcome_msg }}
+              </p>
+
+              <div class="rating" role="optgroup">
+                <!-- in Rails just use 1.upto(5) -->
+                <i
+                  class="fa fa-star-o fa-2x rating-star"
+                  id="rating-1"
+                  data-rating="1"
+                  tabindex="0"
+                  aria-label="Rate as one out of 5 stars"
+                  role="radio"
+                ></i>
+
+                <i
+                  class="fa fa-star-o fa-2x rating-star"
+                  id="rating-2"
+                  data-rating="2"
+                  tabindex="0"
+                  aria-label="Rate as two out of 5 stars"
+                  role="radio"
+                ></i>
+                <i
+                  class="fa fa-star-o fa-2x rating-star"
+                  id="rating-3"
+                  data-rating="3"
+                  tabindex="0"
+                  aria-label="Rate as three out of 5 stars"
+                  role="radio"
+                ></i>
+                <i
+                  class="fa fa-star-o fa-2x rating-star"
+                  id="rating-4"
+                  data-rating="4"
+                  tabindex="0"
+                  aria-label="Rate as four out of 5 stars"
+                  role="radio"
+                ></i>
+                <i
+                  class="fa fa-star-o fa-2x rating-star"
+                  id="rating-5"
+                  data-rating="5"
+                  tabindex="0"
+                  aria-label="Rate as five out of 5 stars"
+                  role="radio"
+                ></i>
+              </div>
+            </div>
+            <div class="customer_form_wrap">
+              <form>
+                <textarea placeholder="Write your review here..."></textarea>
+                <a class="customer_submit_form">Submit</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--review popup tow-->

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+	  <title>Customer Feedback | AutoForce Reviews</title>
+	  <base href="/">
+   	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0,max-age=0" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="pragma" content="no-cache" />
+
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png" type="image/png"> 
+
+    <!-- Bootstrap core CSS-->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="assets/extras/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="assets/extras/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="assets/css/component.css" rel="stylesheet">
+
+    <link href="assets/css/addtohomescreen.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=1717996205" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css" />
+
+    <!--link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:300,400,500,600,700,800" rel="stylesheet"-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap" rel="stylesheet"> 
+        
+    <link rel="apple-touch-icon" sizes="96x96" href="assets/icons/icon-96x96.png">
+
+    <script src="assets/extras/jquery/jquery.min.js"></script>
+    <script src="assets/extras/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="assets/js/addtohomescreen.js"></script>
+    <script src="assets/js/main.js?v=1717996205"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+      $(document).ready(function(){
+        var location_url = window.location.href;
+        var array = location_url.split('/');
+        var location_id = array[array.length-1];
+        var group_id = array[array.length-2];
+        //$("#manifest_selector").attr("href","https://pwa.autoforce.io/manifest.php?group_id="+group_id+"&location_id="+location_id); 
+        //console.log($("#manifest_selector").attr("href"));
+      });
+    </script> 
+   <!-- reduced for brevity -->
+    
+    <!-- inline spinner styles to be able to display spinner right away -->
+    <style type="text/css">
+      body, html {
+        height: 100%;
+      }
+      .app-loading {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .app-loading .spinner {
+        height: 70px;
+        width: 70px;
+        animation: rotate 2s linear infinite;
+        transform-origin: center center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      .app-loading .spinner .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+        stroke: #69b5e0;
+      }
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+        100% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+    </style>    
+    <meta name="theme-color" content="#1976d2"> 
+    <link rel="manifest"  id="manifest_selector"  crossorigin="anonymous">
+  </head>
+ <body id="page-top">
+  <app-root>
+      <!-- loading layout replaced by app after startupp -->
+      <div class="app-loading">
+        <svg class="spinner" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+        </svg>
+      </div>
+  </app-root>         
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+	<noscript>Please enable JavaScript to continue using this application.</noscript>
+ </body>       
+</html>
